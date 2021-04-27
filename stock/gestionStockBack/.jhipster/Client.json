@@ -1,0 +1,37 @@
+{
+    "name": "Client",
+    "fields": [
+        {
+            "fieldName": "idTicket",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-many",
+            "otherEntityName": "product",
+            "otherEntityRelationshipName": "client",
+            "relationshipName": "product",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "ticket",
+            "otherEntityRelationshipName": "client",
+            "relationshipName": "ticket",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20210427150400",
+    "entityTableName": "client",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

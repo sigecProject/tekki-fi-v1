@@ -1,0 +1,63 @@
+entity Administrateur{
+    Id Integer,
+    name String,
+    prenom String,
+    telephone String,
+}
+entity Category{
+	Id Integer,
+    nameCategory String,
+    status Boolean
+}
+entity Product{
+	productCode String,
+    name String,
+    productCategory String
+    prixAchat Integer,
+    prixVente Integer,
+    disponible Boolean,
+    
+}
+entity Client{
+	Id Integer,
+    IdTicket Integer
+
+}
+entity Ticket{
+	Id Integer,
+    prixTotal Float,
+    productId Integer
+}
+
+entity Paiement{
+	Id Integer,
+    numTicket Integer,
+    numPaiement Integer,
+    date LocalDate,
+    montant Double
+}
+relationship OneToMany {
+	Category to Product
+}
+relationship ManyToMany {
+	Client to Product
+}
+relationship OneToOne {
+	Ticket to Client
+}
+
+relationship OneToOne {
+	Paiement to Ticket
+}
+
+// Set pagination options
+paginate all with infinite-scroll
+
+// Use Data Transfert Objects (DTO)
+// dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+// angularSuffix * with mySuffix

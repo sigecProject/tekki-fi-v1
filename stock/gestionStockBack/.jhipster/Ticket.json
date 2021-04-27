@@ -1,0 +1,41 @@
+{
+    "name": "Ticket",
+    "fields": [
+        {
+            "fieldName": "prixTotal",
+            "fieldType": "Float"
+        },
+        {
+            "fieldName": "productId",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "client",
+            "otherEntityRelationshipName": "ticket",
+            "relationshipName": "client",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "paiement",
+            "otherEntityRelationshipName": "ticket",
+            "relationshipName": "paiement",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20210427150500",
+    "entityTableName": "ticket",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

@@ -8,22 +8,20 @@ services:
       - MANAGEMENT_METRICS_EXPORT_PROMETHEUS_ENABLED=true
       - EUREKA_CLIENT_SERVICE_URL_DEFAULTZONE=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/eureka
       - SPRING_CLOUD_CONFIG_URI=http://admin:$${jhipster.registry.password}@jhipster-registry:8761/config
-      - SPRING_DATA_CASSANDRA_CONTACTPOINTS=gestionstockback-cassandra
+      - SPRING_DATASOURCE_URL=jdbc:mysql://gestionstockback-mysql:3306/gestionstockback?useUnicode=true&characterEncoding=utf8&useSSL=false&createDatabaseIfNotExist=true
       - JHIPSTER_SLEEP=30 # gives time for other services to boot before the application
-  gestionstockback-cassandra:
+      - SPRING_DATA_JEST_URI=http://gestionstockback-elasticsearch:9200
+      - SPRING_ELASTICSEARCH_REST_URIS=http://gestionstockback-elasticsearch:9200
+    ports:
+      - 8080:8080
+  gestionstockback-mysql:
     extends:
-      file: cassandra-cluster.yml
-      service: gestionstockback-cassandra
-  gestionstockback-cassandra-node:
-    image: cassandra:3.11.5
-    environment:
-      - CASSANDRA_SEEDS=gestionstockback-cassandra
-  gestionstockback-cassandra-migration:
+      file: mysql.yml
+      service: gestionstockback-mysql
+  gestionstockback-elasticsearch:
     extends:
-      file: cassandra-migration.yml
-      service: gestionstockback-cassandra-migration
-    environment:
-      - CREATE_KEYSPACE_SCRIPT=create-keyspace-prod.cql
+      file: elasticsearch.yml
+      service: gestionstockback-elasticsearch
   jhipster-registry:
     extends:
       file: jhipster-registry.yml

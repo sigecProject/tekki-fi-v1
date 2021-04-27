@@ -23,16 +23,41 @@ eureka:
 spring:
   application:
     name: gestionStockBack
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:h2:mem:gestionStockBack;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    name:
+    username:
+    password:
+    hikari:
+      auto-commit: false
   jackson:
     serialization:
       write-durations-as-timestamps: false
+  jpa:
+    database-platform: io.github.jhipster.domain.util.FixedH2Dialect
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    properties:
+      hibernate.id.new_generator_mappings: true
+      hibernate.connection.provider_disables_autocommit: true
+      hibernate.cache.use_second_level_cache: false
+      hibernate.cache.use_query_cache: false
+      hibernate.generate_statistics: false
+      hibernate.hbm2ddl.auto: validate
+      hibernate.jdbc.time_zone: UTC
   data:
-    cassandra:
-      contactPoints: localhost
-      port: 0
-      protocolVersion: V4
-      compression: NONE
-      keyspaceName: cassandra_unit_keyspace
+    elasticsearch:
+      properties:
+        path:
+          home: target/elasticsearch
+  liquibase:
+    contexts: test
   mail:
     host: localhost
   main:
@@ -77,11 +102,14 @@ jhipster:
       host: localhost
       port: 5000
       queue-size: 512
+  mail:
+    from: test@localhost
+    base-url: http://127.0.0.1:8080
   security:
     authentication:
       jwt:
         # This token must be encoded using Base64 (you can type `echo 'secret-key'|base64` on your command line)
-        base64-secret: ZjM1MmNkOGQwNjM4MWM0YzFmODI1OTE0OGEzMjliMWYwODBjMmMzNDU5NWUwZGE5NGRhYjk1YzIzOWJjNzBkNTk2OTFmNjkyNzYzNDM4MzNlZDUyNjNlNjA2ZmY0OTlhZDBmMDA4ZDFlMTMxNGM2MTM1MGUxNTY1YzcwYTRiZTM=
+        base64-secret: NzRiNjFiYTRhOGIwMWE5OTE3MTE2M2FhMDhkZDA4YmY5Mjk4MjMwNTgzZGU5MzE2MjE4YzBmMjdjYTU2MzYyZmM2YmEyYjM1ZWIxZTdhMzE3OWVmNWVlY2M5NDUzM2Y1NTYxNjNhZDJkOWY2MDkwMmRmZDAyZTY4YTNlNWVjMWE=
         # Token is valid 24 hours
         token-validity-in-seconds: 86400
   metrics:

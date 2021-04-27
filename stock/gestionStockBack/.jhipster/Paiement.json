@@ -1,0 +1,42 @@
+{
+    "name": "Paiement",
+    "fields": [
+        {
+            "fieldName": "numTicket",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "numPaiement",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "montant",
+            "fieldType": "Double"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "ticket",
+            "otherEntityRelationshipName": "paiement",
+            "relationshipName": "ticket",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20210427150600",
+    "entityTableName": "paiement",
+    "dto": "no",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "embedded": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
